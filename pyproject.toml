@@ -1,0 +1,91 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "socratic-morality"
+version = "1.0.0-alpha"
+description = "Constitutional AI Governance Framework - Grounded in Socratic Philosophy"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Anthropic", email = "support@anthropic.com"}
+]
+keywords = [
+    "constitutional-ai",
+    "governance",
+    "socratic-philosophy",
+    "ethical-ai",
+    "multi-agent",
+    "llm-safety"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "typing-extensions>=4.0",
+]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+openai = ["openai>=1.0"]
+storage-sqlite = ["aiosqlite>=0.19"]
+storage-postgres = ["psycopg2>=2.9"]
+langchain = ["langchain>=0.1"]
+autogen = ["pyautogen>=0.2"]
+crewai = ["crewai>=0.1"]
+
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+    "pre-commit>=3.0",
+]
+
+docs = [
+    "sphinx>=5.0",
+    "sphinx-rtd-theme>=1.0",
+    "sphinx-autodoc-typehints>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Nireus79/Socratic-morality"
+Documentation = "https://socratic-morality.readthedocs.io"
+Repository = "https://github.com/Nireus79/Socratic-morality.git"
+Issues = "https://github.com/Nireus79/Socratic-morality/issues"
+
+[tool.setuptools]
+packages = ["socratic_morality"]
+package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-v --cov=socratic_morality --cov-report=html --cov-report=term-missing"
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["src/socratic_morality"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311', 'py312']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
