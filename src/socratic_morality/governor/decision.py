@@ -1,4 +1,5 @@
 """Governor decision module."""
+
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from enum import Enum
@@ -7,6 +8,7 @@ from datetime import datetime
 
 class DecisionType(str, Enum):
     """Types of decisions the Governor can make."""
+
     ALLOW = "allow"
     DENY = "deny"
     ESCALATE = "escalate"
@@ -16,6 +18,7 @@ class DecisionType(str, Enum):
 @dataclass
 class ConstitutionalViolation:
     """Represents a violation of a constitutional principle."""
+
     principle: str
     description: str = ""
 
@@ -23,6 +26,7 @@ class ConstitutionalViolation:
 @dataclass
 class GovernorDecision:
     """Decision made by the Governor."""
+
     allowed: bool
     decision_type: DecisionType
     action: str

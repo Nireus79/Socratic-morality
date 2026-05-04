@@ -1,4 +1,5 @@
 """Tests for framework adapters."""
+
 import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 from socratic_morality.adapters.base import BaseAdapter
@@ -54,12 +55,10 @@ class TestLangChainAdapter:
         mock_governor.evaluate.return_value = mock_decision
 
         wrapped_agent = await langchain_adapter.wrap_agent(mock_agent)
-        assert hasattr(wrapped_agent, 'governed_invoke')
+        assert hasattr(wrapped_agent, "governed_invoke")
 
     @pytest.mark.asyncio
-    async def test_langchain_intercept_allowed(
-        self, langchain_adapter, mock_governor
-    ):
+    async def test_langchain_intercept_allowed(self, langchain_adapter, mock_governor):
         """Test intercepting an allowed action."""
         mock_decision = MagicMock()
         mock_decision.allowed = True
@@ -71,12 +70,11 @@ class TestLangChainAdapter:
         mock_governor.evaluate.return_value = mock_decision
 
         result = await langchain_adapter.intercept_action(
-            action="test action",
-            agent_name="test_agent"
+            action="test action", agent_name="test_agent"
         )
 
-        assert result['allowed'] is True
-        assert result['decision_type'] == DecisionType.ALLOW
+        assert result["allowed"] is True
+        assert result["decision_type"] == DecisionType.ALLOW
 
 
 class TestAutoGenAdapter:
@@ -99,7 +97,7 @@ class TestAutoGenAdapter:
         mock_governor.evaluate.return_value = mock_decision
 
         wrapped_agent = await autogen_adapter.wrap_agent(mock_agent)
-        assert hasattr(wrapped_agent, 'governed_generate_reply')
+        assert hasattr(wrapped_agent, "governed_generate_reply")
 
     @pytest.mark.asyncio
     async def test_autogen_intercept(self, autogen_adapter, mock_governor):
@@ -114,11 +112,10 @@ class TestAutoGenAdapter:
         mock_governor.evaluate.return_value = mock_decision
 
         result = await autogen_adapter.intercept_action(
-            action="reply to message",
-            agent_name="autogen_agent"
+            action="reply to message", agent_name="autogen_agent"
         )
 
-        assert result['allowed'] is True
+        assert result["allowed"] is True
 
 
 class TestCrewAIAdapter:
@@ -142,7 +139,7 @@ class TestCrewAIAdapter:
         mock_governor.evaluate.return_value = mock_decision
 
         wrapped_agent = await crewai_adapter.wrap_agent(mock_agent)
-        assert hasattr(wrapped_agent, 'governed_execute_task')
+        assert hasattr(wrapped_agent, "governed_execute_task")
 
     @pytest.mark.asyncio
     async def test_crewai_intercept(self, crewai_adapter, mock_governor):
@@ -157,8 +154,7 @@ class TestCrewAIAdapter:
         mock_governor.evaluate.return_value = mock_decision
 
         result = await crewai_adapter.intercept_action(
-            action="execute research task",
-            agent_name="researcher"
+            action="execute research task", agent_name="researcher"
         )
 
-        assert result['allowed'] is True
+        assert result["allowed"] is True

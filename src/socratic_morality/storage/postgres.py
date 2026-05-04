@@ -14,10 +14,10 @@ class PostgreSQLStorage(StorageBackend):
         port: int = 5432,
         database: str = "socratic_morality",
         user: str = "postgres",
-        password: str = ""
+        password: str = "",
     ):
         """Initialize PostgreSQL storage.
-        
+
         Args:
             host: PostgreSQL host
             port: PostgreSQL port
@@ -43,15 +43,15 @@ class PostgreSQLStorage(StorageBackend):
         """Initialize database schema."""
         try:
             import asyncpg
-            
+
             self.conn = await asyncpg.connect(
                 host=self.host,
                 port=self.port,
                 database=self.database,
                 user=self.user,
-                password=self.password if self.password else None
+                password=self.password if self.password else None,
             )
-            
+
             await self.conn.execute("""
                 CREATE TABLE IF NOT EXISTS records (
                     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -61,11 +61,11 @@ class PostgreSQLStorage(StorageBackend):
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
-            
+
             await self.conn.execute("""
                 CREATE INDEX IF NOT EXISTS idx_key ON records(key)
             """)
-            
+
         except ImportError:
             raise ImportError(
                 "asyncpg is required for PostgreSQL storage. "
@@ -75,23 +75,20 @@ class PostgreSQLStorage(StorageBackend):
     async def store(self, key: str, value: Dict[str, Any]) -> str:
         """Store a record and return its ID."""
         await self._ensure_connected()
-        
+
         result = await self.conn.fetchval(
             "INSERT INTO records (key, data) VALUES ($1, $2) RETURNING id::TEXT",
             key,
-            json.dumps(value)
+            json.dumps(value),
         )
         return result
 
     async def retrieve(self, key: str) -> Optional[Dict[str, Any]]:
         """Retrieve a record by key."""
         await self._ensure_connected()
-        
-        result = await self.conn.fetchval(
-            "SELECT data FROM records WHERE key = $1 LIMIT 1",
-            key
-        )
-        
+
+        result = await self.conn.fetchval("SELECT data FROM records WHERE key = $1 LIMIT 1", key)
+
         if result:
             return json.loads(result)
         return None
@@ -99,43 +96,38 @@ class PostgreSQLStorage(StorageBackend):
     async def search(self, query: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Search for records matching query."""
         await self._ensure_connected()
-        
+
         # Build WHERE clause dynamically for all query fields
         where_clauses = []
         params = []
-        
+
         for i, (field, value) in enumerate(query.items(), 1):
             where_clauses.append(f"data->>'{field}' = ${i}")
             params.append(value)
-        
+
         where_clause = " AND ".join(where_clauses) if where_clauses else "TRUE"
-        
+
         query_str = f"SELECT data FROM records WHERE {where_clause}"
         rows = await self.conn.fetch(query_str, *params)
-        
-        return [json.loads(row['data']) for row in rows]
+
+        return [json.loads(row["data"]) for row in rows]
 
     async def delete(self, key: str) -> bool:
         """Delete a record by key."""
         await self._ensure_connected()
-        
-        result = await self.conn.execute(
-            "DELETE FROM records WHERE key = $1",
-            key
-        )
-        
+
+        result = await self.conn.execute("DELETE FROM records WHERE key = $1", key)
+
         # Parse the result string to get the number of deleted rows
         return int(result.split()[-1]) > 0
 
     async def list_all(self) -> List[Dict[str, Any]]:
         """List all records."""
         await self._ensure_connected()
-        
-        rows = await self.conn.fetch(
-            "SELECT data FROM records ORDER BY created_at DESC"
-        )
-        
-        return [json.loads(row['data']) for row in rows]
+
+        rows = await self.conn.fetch("SELECT data FROM records ORDER BY created_at DESC")
+
+        return [json.loads(row["data"]) for row in rows]
 
     async def close(self) -> None:
         """Close database connection."""

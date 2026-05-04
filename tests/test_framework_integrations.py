@@ -1,4 +1,5 @@
 """Real framework adapter integration tests."""
+
 import pytest
 from unittest.mock import AsyncMock, MagicMock
 from socratic_morality.adapters.langchain_adapter import LangChainAdapter

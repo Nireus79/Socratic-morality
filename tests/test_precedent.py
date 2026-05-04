@@ -1,4 +1,5 @@
 """Comprehensive tests for moral precedent engine."""
+
 import pytest
 from socratic_morality.precedent.engine import MoralPrecedentEngine
 
@@ -17,16 +18,20 @@ class TestPrecedentStorage:
         """Test storing a precedent case."""
         case_id = await precedent_engine.store_case(
             action="allow user access",
-            decision=type('Decision', (), {
-                'decision_type': 'ALLOW',
-                'allowed': True,
-                'context': {'user_id': 'user1'},
-                'high_impact': False,
-                'actor': 'system'
-            })(),
+            decision=type(
+                "Decision",
+                (),
+                {
+                    "decision_type": "ALLOW",
+                    "allowed": True,
+                    "context": {"user_id": "user1"},
+                    "high_impact": False,
+                    "actor": "system",
+                },
+            )(),
             reasoning="User authenticated and authorized",
             principles_cited=["transparency", "autonomy"],
-            stakeholders_affected=["user"]
+            stakeholders_affected=["user"],
         )
 
         assert case_id is not None
@@ -37,15 +42,19 @@ class TestPrecedentStorage:
         """Test retrieving a stored case."""
         case_id = await precedent_engine.store_case(
             action="test action",
-            decision=type('Decision', (), {
-                'decision_type': 'ALLOW',
-                'allowed': True,
-                'context': {},
-                'high_impact': False,
-                'actor': 'test_actor'
-            })(),
+            decision=type(
+                "Decision",
+                (),
+                {
+                    "decision_type": "ALLOW",
+                    "allowed": True,
+                    "context": {},
+                    "high_impact": False,
+                    "actor": "test_actor",
+                },
+            )(),
             reasoning="test reasoning",
-            principles_cited=["test_principle"]
+            principles_cited=["test_principle"],
         )
 
         case = await precedent_engine.get_case(case_id)
@@ -59,14 +68,18 @@ class TestPrecedentStorage:
         for i in range(5):
             await precedent_engine.store_case(
                 action=f"action_{i}",
-                decision=type('Decision', (), {
-                    'decision_type': 'ALLOW' if i % 2 == 0 else 'DENY',
-                    'allowed': i % 2 == 0,
-                    'context': {},
-                    'high_impact': False,
-                    'actor': f'actor_{i}'
-                })(),
-                reasoning=f"reasoning_{i}"
+                decision=type(
+                    "Decision",
+                    (),
+                    {
+                        "decision_type": "ALLOW" if i % 2 == 0 else "DENY",
+                        "allowed": i % 2 == 0,
+                        "context": {},
+                        "high_impact": False,
+                        "actor": f"actor_{i}",
+                    },
+                )(),
+                reasoning=f"reasoning_{i}",
             )
 
         all_cases = await precedent_engine.get_all_cases()
@@ -81,26 +94,34 @@ class TestSimilaritySearch:
         """Test finding similar cases."""
         await precedent_engine.store_case(
             action="read file from disk",
-            decision=type('Decision', (), {
-                'decision_type': 'ALLOW',
-                'allowed': True,
-                'context': {},
-                'high_impact': False,
-                'actor': 'system'
-            })(),
-            reasoning="Standard read operation"
+            decision=type(
+                "Decision",
+                (),
+                {
+                    "decision_type": "ALLOW",
+                    "allowed": True,
+                    "context": {},
+                    "high_impact": False,
+                    "actor": "system",
+                },
+            )(),
+            reasoning="Standard read operation",
         )
 
         await precedent_engine.store_case(
             action="read data from database",
-            decision=type('Decision', (), {
-                'decision_type': 'ALLOW',
-                'allowed': True,
-                'context': {},
-                'high_impact': False,
-                'actor': 'system'
-            })(),
-            reasoning="Database query"
+            decision=type(
+                "Decision",
+                (),
+                {
+                    "decision_type": "ALLOW",
+                    "allowed": True,
+                    "context": {},
+                    "high_impact": False,
+                    "actor": "system",
+                },
+            )(),
+            reasoning="Database query",
         )
 
         similar = await precedent_engine.find_similar_cases("read file")
@@ -111,14 +132,18 @@ class TestSimilaritySearch:
         """Test that similarity scores are calculated."""
         await precedent_engine.store_case(
             action="user login with password",
-            decision=type('Decision', (), {
-                'decision_type': 'ALLOW',
-                'allowed': True,
-                'context': {},
-                'high_impact': False,
-                'actor': 'auth'
-            })(),
-            reasoning="Authentication"
+            decision=type(
+                "Decision",
+                (),
+                {
+                    "decision_type": "ALLOW",
+                    "allowed": True,
+                    "context": {},
+                    "high_impact": False,
+                    "actor": "auth",
+                },
+            )(),
+            reasoning="Authentication",
         )
 
         similar = await precedent_engine.find_similar_cases("user login")
@@ -135,15 +160,19 @@ class TestPrincipleSearch:
         """Test searching cases by principle."""
         await precedent_engine.store_case(
             action="grant user access",
-            decision=type('Decision', (), {
-                'decision_type': 'ALLOW',
-                'allowed': True,
-                'context': {},
-                'high_impact': False,
-                'actor': 'system'
-            })(),
+            decision=type(
+                "Decision",
+                (),
+                {
+                    "decision_type": "ALLOW",
+                    "allowed": True,
+                    "context": {},
+                    "high_impact": False,
+                    "actor": "system",
+                },
+            )(),
             reasoning="User authorized",
-            principles_cited=["autonomy", "transparency"]
+            principles_cited=["autonomy", "transparency"],
         )
 
         autonomy_cases = await precedent_engine.search_by_principle("autonomy")
@@ -159,27 +188,35 @@ class TestStatistics:
         for i in range(3):
             await precedent_engine.store_case(
                 action=f"action_{i}",
-                decision=type('Decision', (), {
-                    'decision_type': 'ALLOW',
-                    'allowed': True,
-                    'context': {},
-                    'high_impact': False,
-                    'actor': 'system'
-                })(),
-                reasoning="allowed"
+                decision=type(
+                    "Decision",
+                    (),
+                    {
+                        "decision_type": "ALLOW",
+                        "allowed": True,
+                        "context": {},
+                        "high_impact": False,
+                        "actor": "system",
+                    },
+                )(),
+                reasoning="allowed",
             )
 
         for i in range(2):
             await precedent_engine.store_case(
                 action=f"denied_action_{i}",
-                decision=type('Decision', (), {
-                    'decision_type': 'DENY',
-                    'allowed': False,
-                    'context': {},
-                    'high_impact': False,
-                    'actor': 'system'
-                })(),
-                reasoning="denied"
+                decision=type(
+                    "Decision",
+                    (),
+                    {
+                        "decision_type": "DENY",
+                        "allowed": False,
+                        "context": {},
+                        "high_impact": False,
+                        "actor": "system",
+                    },
+                )(),
+                reasoning="denied",
             )
 
         stats = await precedent_engine.get_statistics()

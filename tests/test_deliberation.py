@@ -1,4 +1,5 @@
 """Comprehensive tests for ethical deliberation engine."""
+
 import pytest
 from socratic_morality.ethics.deliberation import EthicalDeliberationEngine
 
@@ -19,7 +20,7 @@ class TestKantianAnalysis:
             action="provide truthful information",
             purpose="help user make decision",
             actor="assistant",
-            context={}
+            context={},
         )
         assert result["frameworks"]["kantian"]["allowed"] is True
 
@@ -27,10 +28,7 @@ class TestKantianAnalysis:
     async def test_kantian_denies_manipulation(self, deliberation_engine):
         """Test that Kantian analysis denies manipulation."""
         result = await deliberation_engine.analyze(
-            action="manipulate user",
-            purpose="achieve goal",
-            actor="assistant",
-            context={}
+            action="manipulate user", purpose="achieve goal", actor="assistant", context={}
         )
         assert result["frameworks"]["kantian"]["allowed"] is False
 
@@ -45,7 +43,7 @@ class TestRightsBasedAnalysis:
             action="access data without consent",
             purpose="improve system",
             actor="assistant",
-            context={}
+            context={},
         )
         assert result["frameworks"]["rights_based"]["allowed"] is False
 
@@ -60,7 +58,7 @@ class TestSynthesizedAnalysis:
             action="provide helpful information",
             purpose="assist user",
             actor="assistant",
-            context={"user_id": "user123"}
+            context={"user_id": "user123"},
         )
 
         assert "kantian" in result["frameworks"]
@@ -75,7 +73,7 @@ class TestSynthesizedAnalysis:
             action="manipulate user without consent",
             purpose="achieve goal",
             actor="assistant",
-            context={}
+            context={},
         )
         assert result["allowed"] is False
 
@@ -83,9 +81,6 @@ class TestSynthesizedAnalysis:
     async def test_confidence_property(self, deliberation_engine):
         """Test confidence is calculated across frameworks."""
         result = await deliberation_engine.analyze(
-            action="process data",
-            purpose="assist",
-            actor="assistant",
-            context={}
+            action="process data", purpose="assist", actor="assistant", context={}
         )
         assert 0 <= result["confidence"] <= 1.0

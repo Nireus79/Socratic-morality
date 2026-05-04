@@ -1,13 +1,18 @@
 """Constitutional Governor - core decision engine."""
+
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pathlib import Path
 from socratic_morality.governor.decision import DecisionType, GovernorDecision
 from socratic_morality.constitution.models import Constitution
 
+
 class Governor:
     """Governor for constitutional AI governance."""
-    def __init__(self, constitution: Union[str, Path, Dict, Constitution], llm_provider: str = "anthropic"):
+
+    def __init__(
+        self, constitution: Union[str, Path, Dict, Constitution], llm_provider: str = "anthropic"
+    ):
         if isinstance(constitution, Constitution):
             self.constitution = constitution
         elif isinstance(constitution, (str, Path)):
@@ -49,5 +54,5 @@ class Governor:
             violations=violations,
             reasoning="Action approved by Governor",
             decision_id=decision_id,
-            timestamp=timestamp
+            timestamp=timestamp,
         )

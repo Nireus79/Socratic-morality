@@ -7,6 +7,7 @@ from typing import List, Set
 @dataclass
 class CapabilityToken:
     """Token representing agent capabilities."""
+
     agent_id: str
     capabilities: Set[str] = field(default_factory=set)
 
@@ -38,51 +39,31 @@ class CapabilityValidator:
         """Initialize capability validator."""
         self.tokens: dict[str, CapabilityToken] = {}
 
-    def register_agent(
-        self,
-        agent_id: str,
-        capabilities: List[str]
-    ) -> CapabilityToken:
+    def register_agent(self, agent_id: str, capabilities: List[str]) -> CapabilityToken:
         """Register an agent with specific capabilities."""
         token = CapabilityToken(agent_id, set(capabilities))
         self.tokens[agent_id] = token
         return token
 
-    def validate(
-        self,
-        agent_id: str,
-        required_capability: str
-    ) -> bool:
+    def validate(self, agent_id: str, required_capability: str) -> bool:
         """Validate that an agent has required capability."""
         if agent_id not in self.tokens:
             return False
         return self.tokens[agent_id].has_capability(required_capability)
 
-    def validate_all(
-        self,
-        agent_id: str,
-        required_capabilities: List[str]
-    ) -> bool:
+    def validate_all(self, agent_id: str, required_capabilities: List[str]) -> bool:
         """Validate that an agent has all required capabilities."""
         if agent_id not in self.tokens:
             return False
         return self.tokens[agent_id].has_all_capabilities(required_capabilities)
 
-    def validate_any(
-        self,
-        agent_id: str,
-        required_capabilities: List[str]
-    ) -> bool:
+    def validate_any(self, agent_id: str, required_capabilities: List[str]) -> bool:
         """Validate that an agent has any of the required capabilities."""
         if agent_id not in self.tokens:
             return False
         return self.tokens[agent_id].has_any_capability(required_capabilities)
 
-    def revoke_capability(
-        self,
-        agent_id: str,
-        capability: str
-    ) -> bool:
+    def revoke_capability(self, agent_id: str, capability: str) -> bool:
         """Revoke a capability from an agent."""
         if agent_id not in self.tokens:
             return False

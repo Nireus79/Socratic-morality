@@ -1,4 +1,5 @@
 """Tests for capability-based access control."""
+
 import pytest
 from socratic_morality.security.capabilities import CapabilityToken, CapabilityValidator
 
