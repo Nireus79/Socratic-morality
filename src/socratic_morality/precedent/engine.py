@@ -26,6 +26,7 @@ class MoralPrecedentEngine:
         self.constitution = constitution
         self.cases: List[Dict[str, Any]] = []
         self._case_counter = 0
+        self._initialize_embeddings()
 
     async def store_case(
         self,
@@ -187,3 +188,58 @@ class MoralPrecedentEngine:
     async def get_all_cases(self) -> List[Dict[str, Any]]:
         """Get all stored cases."""
         return self.cases.copy()
+
+    def _initialize_embeddings(self) -> None:
+        """Initialize semantic embeddings if available."""
+        try:
+            from socratic_morality.precedent.embeddings import SemanticEmbeddings
+            self.embeddings = SemanticEmbeddings()
+        except ImportError:
+            self.embeddings = None
+
+    async def find_similar_cases_semantic(
+        self,
+        action: str,
+        limit: int = 5,
+        threshold: float = 0.3
+    ) -> List[Dict[str, Any]]:
+        """Find semantically similar cases using embeddings.
+
+        Falls back to word-overlap method if embeddings unavailable.
+
+        Args:
+            action: Action to find similar cases for
+            limit: Maximum number of results
+            threshold: Minimum similarity threshold
+
+        Returns:
+            List of similar cases with similarity scores
+        """
+        if not self.cases:
+            return []
+
+        # Try semantic similarity first
+        if self.embeddings and self.embeddings.is_available():
+            query_embedding = self.embeddings.embed(action)
+            if query_embedding:
+                similar = []
+                for case in self.cases:
+                    case_embedding = self.embeddings.embed(case.get('action', ''))
+                    if case_embedding:
+                        score = self.embeddings.cosine_similarity(
+                            query_embedding, case_embedding
+                        )
+                        if score >= threshold:
+                            similar.append({
+                                **case,
+                                'similarity_score': score,
+                                'similarity_method': 'semantic'
+                            })
+
+                similar.sort(
+                    key=lambda x: x['similarity_score'], reverse=True
+                )
+                return similar[:limit]
+
+        # Fallback to word-overlap similarity
+        return await self.find_similar_cases(action, limit, threshold)
