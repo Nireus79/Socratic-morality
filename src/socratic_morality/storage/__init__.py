@@ -1,11 +1,6 @@
-"""Storage backends for precedent and audit logs."""
+"""Storage - Persistence backends for governance data."""
 
-from socratic_morality.storage.base import StorageBackend
-from socratic_morality.storage.sqlite import SQLiteStorage
+from .base import StorageBackend
+from .sqlite import SQLiteStorage
 
-try:
-    from socratic_morality.storage.postgres import PostgreSQLStorage
-except ImportError:
-    PostgreSQLStorage = None
-
-__all__ = ["StorageBackend", "SQLiteStorage", "PostgreSQLStorage"]
+__all__ = ["StorageBackend", "SQLiteStorage"]

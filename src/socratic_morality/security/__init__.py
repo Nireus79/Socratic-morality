@@ -1,1 +1,5 @@
-"""Socratic Morality - Constitutional AI Governance Framework"""
+"""Security - Capability-based access control."""
+
+from .capabilities import CapabilityToken, CapabilityValidator
+
+__all__ = ["CapabilityToken", "CapabilityValidator"]
