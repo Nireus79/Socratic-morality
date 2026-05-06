@@ -37,6 +37,7 @@ class Constitution:
     supreme_principle: str = ""
     principles: Dict[str, Principle] = field(default_factory=dict)
     rules: List[Rule] = field(default_factory=list)
+    capabilities: Dict[str, Any] = field(default_factory=dict)  # Agent capabilities definitions
 
     @classmethod
     def load_from_file(cls, path: Union[str, Path]) -> "Constitution":
@@ -66,4 +67,5 @@ class Constitution:
             supreme_principle=data.get("supreme_principle", ""),
             principles=principles,
             rules=rules,
+            capabilities=data.get("capabilities", {}),
         )
