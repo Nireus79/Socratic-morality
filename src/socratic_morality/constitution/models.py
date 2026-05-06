@@ -52,7 +52,9 @@ class Constitution:
         principles = {}
         if "principles" in data:
             for name, p_data in data["principles"].items():
-                principles[name] = Principle(name=name, **p_data)
+                # Extract name from p_data if provided, otherwise use the key
+                principle_name = p_data.pop("name", name) if isinstance(p_data, dict) else name
+                principles[name] = Principle(name=principle_name, **p_data)
 
         rules = []
         if "rules" in data:
