@@ -74,17 +74,17 @@ decision = await governor.evaluate(
 
 ## Status
 
-**Phase 1 & 2**: Complete ✅ (v0.0.3)
-- Published to PyPI: `pip install socratic-morality==0.0.3`
+**Phase 1 & 2**: Complete ✅ (v0.0.4)
+- Published to PyPI: `pip install socratic-morality==0.0.4`
 - Used by: socratic-agents (governance integration)
 
-**Phase 3**: Complete ✅ (v0.1.0 - in development)
+**Phase 3**: Complete ✅ (v0.0.5 - ready for release)
 - Constitutional Enforcer - Active principle enforcement
 - Governance API - Unified decision interface
 - Socratic Dialogue Engine - Interactive questioning
 - Semantic Precedent Matching - Advanced similarity search
 - All modules fully tested and integrated
-- Expected release: May 2026
+- Release: May 2026
 
 ## License
 
