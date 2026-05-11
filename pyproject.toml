@@ -72,8 +72,10 @@ Repository = "https://github.com/Nireus79/Socratic-morality.git"
 Issues = "https://github.com/Nireus79/Socratic-morality/issues"
 
 [tool.setuptools]
-packages = ["socratic_morality"]
 package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
