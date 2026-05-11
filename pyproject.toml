@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "socratic-morality"
-version = "0.0.5"
+version = "0.0.6"
 description = "Constitutional AI Governance Framework - Grounded in Socratic Philosophy"
 readme = "README.md"
 requires-python = ">=3.10"
