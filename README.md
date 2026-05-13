@@ -1,5 +1,11 @@
 # Socratic Morality
 
+[![PyPI](https://img.shields.io/pypi/v/socratic-morality.svg)](https://pypi.org/project/socratic-morality/)
+[![Downloads](https://img.shields.io/pypi/dm/socratic-morality.svg)](https://pypi.org/project/socratic-morality/)
+[![GitHub](https://img.shields.io/github/stars/Nireus79/Socratic-morality.svg?style=social)](https://github.com/Nireus79/Socratic-morality)
+[![License](https://img.shields.io/github/license/Nireus79/Socratic-morality.svg)](LICENSE)
+
+
 **Constitutional AI Governance Framework** - Building trustworthy, accountable multi-agent systems grounded in Socratic philosophy.
 
 > "It is better to suffer injustice than to commit it." — Plato's Gorgias
@@ -151,3 +157,34 @@ pip install socratic-morality==0.0.5
 ## License
 
 MIT License - See [LICENSE](LICENSE) for details
+
+
+---
+
+## Part of Socrates AI Ecosystem
+
+This package is a component of [**Socrates AI**](https://github.com/Nireus79/Socrates), a production-ready platform for building intelligent multi-agent systems with constitutional governance.
+
+### Use This Package Standalone:
+```bash
+pip install socratic-morality
+```
+
+### Or As Part of Socrates Platform:
+```bash
+pip install socrates-ai  # Includes 37+ modules + all 11 packages
+```
+
+### Integration Example:
+
+See the [**Socrates ECOSYSTEM.md**](https://github.com/Nireus79/Socrates/blob/main/ECOSYSTEM.md#layer-2-specialized-libraries) for detailed integration examples showing how to use socratic-morality with other Socratic packages.
+
+**Related packages you might use together:**
+- See [Complete Package Map](https://github.com/Nireus79/Socrates/blob/main/ECOSYSTEM.md)
+
+### More Information:
+- 📖 [Full Socrates Documentation](https://github.com/Nireus79/Socrates/tree/main/docs)
+- 🏗️ [Complete Architecture Guide](https://github.com/Nireus79/Socrates/blob/main/ECOSYSTEM.md)
+- 💬 [Socrates Discussions](https://github.com/Nireus79/Socrates/discussions)
+
+---
