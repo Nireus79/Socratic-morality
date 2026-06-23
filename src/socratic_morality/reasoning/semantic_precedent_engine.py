@@ -180,7 +180,9 @@ class SemanticPrecedentEngine:
 
         return clusters
 
-    def get_precedent_by_semantic_distance(self, action: str, limit: int = 10) -> List[PrecedentMatch]:
+    def get_precedent_by_semantic_distance(
+        self, action: str, limit: int = 10
+    ) -> List[PrecedentMatch]:
         """Get precedents ranked by semantic distance.
 
         Args:
@@ -326,7 +328,9 @@ class SemanticPrecedentEngine:
         sum_squares = sum((a - b) ** 2 for a, b in zip(vec1, vec2))
         return math.sqrt(sum_squares)
 
-    def _compute_relevance_score(self, similarity: float, case: Dict[str, Any], action: str) -> float:
+    def _compute_relevance_score(
+        self, similarity: float, case: Dict[str, Any], action: str
+    ) -> float:
         """Compute combined relevance score.
 
         Args:

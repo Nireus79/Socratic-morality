@@ -519,8 +519,13 @@ class SocraticDialogueEngine:
             if exchange.answer:
                 # Detect concerns in answers
                 answer_lower = exchange.answer.lower()
-                if any(word in answer_lower for word in ["concern", "worry", "risk", "problem", "danger"]):
-                    synthesis.tensions_identified.append(f"Concern raised in response to: {exchange.question.text}")
+                if any(
+                    word in answer_lower
+                    for word in ["concern", "worry", "risk", "problem", "danger"]
+                ):
+                    synthesis.tensions_identified.append(
+                        f"Concern raised in response to: {exchange.question.text}"
+                    )
 
         synthesis.key_insights = list(all_insights)
 

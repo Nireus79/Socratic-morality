@@ -112,7 +112,9 @@ class ConstitutionalEnforcer:
         self._violation_cache[action_description] = violations
         return violations
 
-    def _check_principle_violation(self, principle: Principle, action_lower: str) -> Optional[PrincipleViolation]:
+    def _check_principle_violation(
+        self, principle: Principle, action_lower: str
+    ) -> Optional[PrincipleViolation]:
         """Check if an action violates a specific principle.
 
         Args:

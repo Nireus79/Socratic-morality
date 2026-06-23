@@ -85,9 +85,7 @@ class TestRelationshipIdentification:
 
     def test_identify_multiple_relationships(self, care_analyzer):
         """Test identifying multiple relationships."""
-        relationships = care_analyzer.identify_relationships(
-            ["child", "caregiver", "patient"]
-        )
+        relationships = care_analyzer.identify_relationships(["child", "caregiver", "patient"])
 
         assert len(relationships) >= 3
         dependency_rels = [r for r in relationships if r.relationship_type == "dependent"]
@@ -196,12 +194,8 @@ class TestCareResponseEvaluation:
 
     def test_care_response_caching(self, care_analyzer):
         """Test care response evaluation results."""
-        analysis1 = care_analyzer.evaluate_care_response(
-            "test action", ["test_stakeholder"]
-        )
-        analysis2 = care_analyzer.evaluate_care_response(
-            "test action", ["test_stakeholder"]
-        )
+        analysis1 = care_analyzer.evaluate_care_response("test action", ["test_stakeholder"])
+        analysis2 = care_analyzer.evaluate_care_response("test action", ["test_stakeholder"])
 
         assert analysis1.care_score == analysis2.care_score
 

@@ -124,8 +124,7 @@ class TestLimitViolationDetection:
         if violations:
             # Violations should be marked as warning or critical
             assert all(
-                v.severity in (SeverityLevel.WARNING, SeverityLevel.CRITICAL)
-                for v in violations
+                v.severity in (SeverityLevel.WARNING, SeverityLevel.CRITICAL) for v in violations
             )
 
     def test_violation_stored_in_session(self, resource_monitor):

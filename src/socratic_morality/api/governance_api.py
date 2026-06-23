@@ -8,7 +8,10 @@ from enum import Enum
 
 from socratic_morality.governor.core import Governor
 from socratic_morality.governor.decision import GovernorDecision, DecisionType
-from socratic_morality.governance.constitutional_enforcer import ConstitutionalEnforcer, ConstitutionalCheck
+from socratic_morality.governance.constitutional_enforcer import (
+    ConstitutionalEnforcer,
+    ConstitutionalCheck,
+)
 from socratic_morality.constitution.models import Constitution
 from socratic_morality.precedent.engine import MoralPrecedentEngine
 from socratic_morality.ethics.deliberation import EthicalDeliberationEngine
@@ -126,8 +129,12 @@ class GovernanceAPI:
         self.enforcer = ConstitutionalEnforcer()
         self.enforcer.constitution = self.constitution
 
-        self.precedent_engine = MoralPrecedentEngine(constitution=self.constitution) if enable_precedent else None
-        self.deliberation_engine = EthicalDeliberationEngine(llm_provider=llm_provider) if enable_deliberation else None
+        self.precedent_engine = (
+            MoralPrecedentEngine(constitution=self.constitution) if enable_precedent else None
+        )
+        self.deliberation_engine = (
+            EthicalDeliberationEngine(llm_provider=llm_provider) if enable_deliberation else None
+        )
 
         # Decision history
         self._decision_history: List[GovernanceDecision] = []
@@ -190,7 +197,9 @@ class GovernanceAPI:
 
         deliberation = None
         if self.enable_deliberation and self.deliberation_engine:
-            deliberation = await self._deliberate(action, context, actor, constitutional_check.violations)
+            deliberation = await self._deliberate(
+                action, context, actor, constitutional_check.violations
+            )
 
         threat_analysis = self._analyze_threats(action, context)
 
@@ -244,7 +253,9 @@ class GovernanceAPI:
         decision = await self.evaluate(action, context, actor)
 
         if interactive and self.enable_dialogue:
-            dialogue_transcript = await self._conduct_dialogue(action, context, decision, user_input_fn)
+            dialogue_transcript = await self._conduct_dialogue(
+                action, context, decision, user_input_fn
+            )
             decision.dialogue_transcript = dialogue_transcript
 
         return decision
@@ -328,7 +339,11 @@ class GovernanceAPI:
         return PrecedentAnalysis(
             similar_precedents=similar,
             precedent_consistency=0.7 if similar else 0.5,
-            reasoning="Based on semantic similarity to previous cases." if similar else "No similar precedents found.",
+            reasoning=(
+                "Based on semantic similarity to previous cases."
+                if similar
+                else "No similar precedents found."
+            ),
         )
 
     async def _deliberate(
@@ -421,7 +436,9 @@ class GovernanceAPI:
         transcript = []
 
         # Initial question
-        initial_question = f"Regarding the action: '{action}' - Do you have any concerns about this action?"
+        initial_question = (
+            f"Regarding the action: '{action}' - Do you have any concerns about this action?"
+        )
         transcript.append({"role": "system", "message": initial_question})
 
         if user_input_fn:
@@ -436,7 +453,9 @@ class GovernanceAPI:
 
         return transcript
 
-    def _determine_decision_type(self, constitutional_check: ConstitutionalCheck, high_impact: bool) -> str:
+    def _determine_decision_type(
+        self, constitutional_check: ConstitutionalCheck, high_impact: bool
+    ) -> str:
         """Determine the type of decision.
 
         Args:
@@ -519,7 +538,10 @@ class GovernanceAPI:
             recommendations.append("Consider modifying the action to comply with principles")
             recommendations.append("Request human review for potential exceptions")
 
-        if decision.threat_analysis and decision.threat_analysis.threat_level in ["high", "critical"]:
+        if decision.threat_analysis and decision.threat_analysis.threat_level in [
+            "high",
+            "critical",
+        ]:
             recommendations.extend(decision.threat_analysis.mitigation_strategies)
 
         if decision.requires_escalation():

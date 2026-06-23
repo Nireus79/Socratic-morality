@@ -273,9 +273,7 @@ class ResourceMonitor:
 
         return violations
 
-    def enforce_limits(
-        self, session_id: str, hard: bool = False
-    ) -> Dict[str, Any]:
+    def enforce_limits(self, session_id: str, hard: bool = False) -> Dict[str, Any]:
         """Enforce resource limits for a session.
 
         Args:
@@ -370,7 +368,9 @@ class ResourceMonitor:
         duration = (stop_time - start_time).total_seconds()
 
         # Count violations
-        critical_violations = [v for v in session.violations if v.severity == SeverityLevel.CRITICAL]
+        critical_violations = [
+            v for v in session.violations if v.severity == SeverityLevel.CRITICAL
+        ]
 
         # Generate recommendations
         recommendations = self._generate_recommendations(

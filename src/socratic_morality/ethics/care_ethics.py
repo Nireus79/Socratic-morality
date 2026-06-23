@@ -92,9 +92,7 @@ class CareEthicsAnalyzer:
         self.vulnerability_assessments: Dict[str, VulnerabilityScore] = {}
         self.care_violation_history: List[CareViolation] = []
 
-    async def analyze(
-        self, action: str, context: Dict[str, Any]
-    ) -> CareEthicsResult:
+    async def analyze(self, action: str, context: Dict[str, Any]) -> CareEthicsResult:
         """Analyze action through care ethics lens.
 
         Args:
@@ -277,9 +275,7 @@ class CareEthicsAnalyzer:
         self.vulnerability_assessments[stakeholder] = score
         return score
 
-    def evaluate_care_response(
-        self, action: str, affected_parties: List[str]
-    ) -> CareAnalysis:
+    def evaluate_care_response(self, action: str, affected_parties: List[str]) -> CareAnalysis:
         """Check if action adequately responds to care needs.
 
         Args:
@@ -346,9 +342,7 @@ class CareEthicsAnalyzer:
             improvement_suggestions.append(
                 "Consider how this action preserves and strengthens relationships"
             )
-            improvement_suggestions.append(
-                "Evaluate impact on most vulnerable stakeholders"
-            )
+            improvement_suggestions.append("Evaluate impact on most vulnerable stakeholders")
             improvement_suggestions.append("Ensure consent and communication with affected parties")
 
         # Generate alternatives
@@ -513,9 +507,7 @@ class CareEthicsAnalyzer:
         if conclusion == CareConclusion.CARING:
             parts.append("Action demonstrates adequate care and attention to relationships.")
         elif conclusion == CareConclusion.INDIFFERENT:
-            parts.append(
-                "Action shows mixed or moderate care response. Improvement possible."
-            )
+            parts.append("Action shows mixed or moderate care response. Improvement possible.")
         else:
             parts.append("Action fails to provide adequate care. Significant concerns identified.")
 

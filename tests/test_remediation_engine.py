@@ -8,7 +8,11 @@ from socratic_morality.governance.remediation_engine import (
     RemediationSuggestion,
     SafeguardPlan,
 )
-from socratic_morality.governor.decision import GovernorDecision, DecisionType, ConstitutionalViolation
+from socratic_morality.governor.decision import (
+    GovernorDecision,
+    DecisionType,
+    ConstitutionalViolation,
+)
 
 
 @pytest.fixture
@@ -180,7 +184,7 @@ class TestAutoRemediation:
 
         # Result should be valid - may be no remediation needed or success
         assert result is not None
-        assert hasattr(result, 'success')
+        assert hasattr(result, "success")
 
     @pytest.mark.asyncio
     async def test_auto_remediation_no_violations(self, remediation_engine):
@@ -208,9 +212,7 @@ class TestSafeguardImplementation:
     @pytest.mark.asyncio
     async def test_implement_safeguards(self, remediation_engine):
         """Test safeguard plan generation."""
-        plan = await remediation_engine.implement_safeguards(
-            "execute potentially risky operation"
-        )
+        plan = await remediation_engine.implement_safeguards("execute potentially risky operation")
 
         assert isinstance(plan, SafeguardPlan)
         assert len(plan.safeguards) > 0
