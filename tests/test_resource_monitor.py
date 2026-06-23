@@ -5,8 +5,6 @@ import os
 from socratic_morality.security.resource_monitor import (
     ResourceMonitor,
     ResourceUsage,
-    LimitViolation,
-    ResourceType,
     SeverityLevel,
 )
 

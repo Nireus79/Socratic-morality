@@ -1,7 +1,7 @@
 """Semantic embeddings for precedent similarity search."""
 
 import math
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 
 class SemanticEmbeddings:

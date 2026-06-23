@@ -1,8 +1,7 @@
 """Tests for framework adapters."""
 
 import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
-from socratic_morality.adapters.base import BaseAdapter
+from unittest.mock import AsyncMock, MagicMock
 from socratic_morality.adapters.langchain_adapter import LangChainAdapter
 from socratic_morality.adapters.autogen_adapter import AutoGenAdapter
 from socratic_morality.adapters.crewai_adapter import CrewAIAdapter

@@ -1,7 +1,6 @@
 """Tests for PostgreSQL storage backend."""
 
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 
 
 class TestPostgreSQLStorageConfiguration:

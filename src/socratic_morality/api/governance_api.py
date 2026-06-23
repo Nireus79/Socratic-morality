@@ -7,7 +7,6 @@ from uuid import uuid4
 from enum import Enum
 
 from socratic_morality.governor.core import Governor
-from socratic_morality.governor.decision import GovernorDecision, DecisionType
 from socratic_morality.governance.constitutional_enforcer import (
     ConstitutionalEnforcer,
     ConstitutionalCheck,
@@ -15,7 +14,6 @@ from socratic_morality.governance.constitutional_enforcer import (
 from socratic_morality.constitution.models import Constitution
 from socratic_morality.precedent.engine import MoralPrecedentEngine
 from socratic_morality.ethics.deliberation import EthicalDeliberationEngine
-from socratic_morality.precedent.embeddings import SemanticEmbeddings
 
 
 class DecisionCategory(str, Enum):
@@ -412,7 +410,7 @@ class GovernanceAPI:
             threat_level=threat_level,
             threats_identified=threats,
             mitigation_strategies=mitigation,
-            reasoning=f"Threat assessment based on action keywords and context.",
+            reasoning="Threat assessment based on action keywords and context.",
         )
 
     async def _conduct_dialogue(

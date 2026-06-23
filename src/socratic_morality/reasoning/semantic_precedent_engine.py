@@ -1,6 +1,6 @@
 """Semantic Precedent Matching Engine using embeddings."""
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 from dataclasses import dataclass, field
 import math
 

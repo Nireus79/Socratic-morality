@@ -4,10 +4,6 @@ import pytest
 from socratic_morality.ethics.care_ethics import (
     CareEthicsAnalyzer,
     CareConclusion,
-    Relationship,
-    VulnerabilityScore,
-    CareViolation,
-    CareAnalysis,
 )
 
 

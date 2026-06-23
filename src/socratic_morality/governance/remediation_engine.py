@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from enum import Enum
 from datetime import datetime
-from socratic_morality.governor.decision import GovernorDecision, DecisionType
+from socratic_morality.governor.decision import GovernorDecision
 
 
 class RemediationType(str, Enum):

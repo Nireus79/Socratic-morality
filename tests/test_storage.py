@@ -2,8 +2,6 @@
 
 import pytest
 import asyncio
-from pathlib import Path
-from socratic_morality.storage.base import StorageBackend
 from socratic_morality.storage.sqlite import SQLiteStorage
 
 

@@ -2,7 +2,6 @@
 
 import pytest
 from socratic_morality.governor.core import Governor
-from socratic_morality.constitution.models import Constitution
 
 
 @pytest.mark.asyncio

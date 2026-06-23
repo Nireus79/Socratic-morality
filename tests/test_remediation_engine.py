@@ -5,7 +5,6 @@ from socratic_morality.governance.remediation_engine import (
     RemediationEngine,
     RemediationType,
     RiskLevel,
-    RemediationSuggestion,
     SafeguardPlan,
 )
 from socratic_morality.governor.decision import (

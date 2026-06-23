@@ -1,7 +1,7 @@
 """Care Ethics Framework for relational and context-aware moral analysis."""
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from enum import Enum
 
 
