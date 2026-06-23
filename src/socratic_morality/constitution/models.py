@@ -1,6 +1,6 @@
 """Constitution model and related types."""
 
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 import yaml
@@ -16,6 +16,15 @@ class Principle:
     description: str = ""
     source: str = ""
 
+    @staticmethod
+    def from_dict(data: dict) -> "Principle":
+        """Deserialize from dictionary."""
+        return Principle(**data)
+
+    def to_dict(self) -> dict:
+        """Serialize to dictionary."""
+        return asdict(self)
+
 
 @dataclass
 class Rule:
@@ -27,6 +36,15 @@ class Rule:
     action: str = "deny"
     severity: str = "medium"
     requires_human_approval: bool = False
+
+    @staticmethod
+    def from_dict(data: dict) -> "Rule":
+        """Deserialize from dictionary."""
+        return Rule(**data)
+
+    def to_dict(self) -> dict:
+        """Serialize to dictionary."""
+        return asdict(self)
 
 
 @dataclass
@@ -73,3 +91,15 @@ class Constitution:
             capabilities=data.get("capabilities", {}),
             action_policies=data.get("action_policies", {}),
         )
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Serialize constitution to dictionary."""
+        return {
+            "metadata": self.metadata,
+            "supreme_principle": self.supreme_principle,
+            "principles": {name: p.to_dict() for name, p in self.principles.items()},
+            "rules": [r.to_dict() for r in self.rules],
+            "axioms": self.axioms,
+            "capabilities": self.capabilities,
+            "action_policies": self.action_policies,
+        }
