@@ -139,9 +139,9 @@ decision = await governor.evaluate(
 
 ## Release Status
 
-**v0.0.5 - COMPLETE ✅ (May 2026)**
+**v0.0.5 (May 2026)**
 
-All 13 modules fully implemented, tested, and documented:
+The 13 modules:
 - Phase 1: 3 foundation modules ✅
 - Phase 2: 3 ethical reasoning modules ✅
 - Phase 3: 4 advanced governance modules ✅
@@ -152,7 +152,7 @@ All 13 modules fully implemented, tested, and documented:
 pip install socratic-morality==0.0.5
 ```
 
-**Documentation**: Complete API docs and examples included
+**Documentation**: API docs and examples are in the repository
 
 ## License
 
