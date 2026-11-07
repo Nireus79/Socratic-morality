@@ -453,9 +453,9 @@ async def monitor_agent_execution():
 
 All three modules include comprehensive test suites:
 
-- `tests/test_care_ethics.py` - 24 tests covering care ethics analysis
-- `tests/test_remediation_engine.py` - 18 tests covering remediation workflows
-- `tests/test_resource_monitor.py` - 29 tests covering resource monitoring
+- `tests/test_care_ethics.py` - tests for care ethics analysis
+- `tests/test_remediation_engine.py` - tests for remediation workflows
+- `tests/test_resource_monitor.py` - tests for resource monitoring
 
 Run tests:
 

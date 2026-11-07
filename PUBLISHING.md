@@ -61,7 +61,7 @@ The package is configured via:
 
 - **Alpha**: 1.0.0-alpha (current - Foundation phase)
 - **Beta**: 1.0.0-beta (after Phase 2 - Ethical reasoning complete)
-- **Release**: 1.0.0 (after Phase 3 - Enterprise features complete)
+- **Release**: 1.0.0 (after Phase 3)
 
 ## Timeline
 

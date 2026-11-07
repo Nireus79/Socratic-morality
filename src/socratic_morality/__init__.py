@@ -22,7 +22,7 @@ from .ethics import EthicalDeliberationEngine, ExplanationGenerator
 # Storage backends
 from .storage import StorageBackend, SQLiteStorage
 
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 
 __all__ = [
     # Governor and decisions
